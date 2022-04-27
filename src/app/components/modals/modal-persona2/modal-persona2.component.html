@@ -1,0 +1,126 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{tituloModal}}</h5>
+    <button type="button" class="btn-close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <form [formGroup]="formulario" (ngSubmit)="savePersona()">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-white">
+                                    <i class="bi bi-person-circle"
+                                        [class.green-icon]="this.formulario.get('nombres')!.valid"
+                                        [class.red-icon]="this.formulario.get('nombres')!.invalid && this.formulario.get('nombres')!.touched"></i>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" formControlName="nombres" placeholder="Nombres"
+                                maxlength="200">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-white">
+                                    <i class="bi bi-person-circle"
+                                        [class.green-icon]="this.formulario.get('apellidos')!.valid"
+                                        [class.red-icon]="this.formulario.get('apellidos')!.invalid && this.formulario.get('apellidos')!.touched"></i>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" formControlName="apellidos" placeholder="Apellidos"
+                                maxlength="200">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">Tipo Documento</label>
+                        <div class="form-control mb-3">
+                            <div class="form-check form-check-inline" *ngFor="let item of tiposDocumento">
+                                <input id="tipoDocumentoInput{{item.id}}" type="radio" class="form-check-input"
+                                    name="tipoDocumento" formControlName="tipoDocumento" value="{{item.id}}">
+                                <label for="tipoDocumentoInput{{item.id}}"
+                                    class="form-check-label">{{item.nombre}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-white">
+                                    <i class="bi bi-person-circle"
+                                        [class.green-icon]="this.formulario.get('noDocumento')!.valid"
+                                        [class.red-icon]="this.formulario.get('noDocumento')!.invalid && this.formulario.get('noDocumento')!.touched"></i>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" formControlName="noDocumento"
+                                placeholder="No Documento" maxlength="200">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-white">
+                                    <i class="bi bi-person-circle"
+                                        [class.green-icon]="this.formulario.get('fechaNacimiento')!.valid"
+                                        [class.red-icon]="this.formulario.get('fechaNacimiento')!.invalid && this.formulario.get('fechaNacimiento')!.touched"></i>
+                                </div>
+                            </div>
+                            <input type="date" class="form-control" formControlName="fechaNacimiento"
+                                placeholder="Fecha Nacimiento" maxlength="200">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-white">
+                                    <i class="bi bi-person-circle"
+                                        [class.green-icon]="this.formulario.get('noContacto')!.valid"
+                                        [class.red-icon]="this.formulario.get('noContacto')!.invalid && this.formulario.get('noContacto')!.touched"></i>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" formControlName="noContacto"
+                                placeholder="No Contacto" maxlength="200">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-white">
+                                    <i class="bi bi-person-circle"
+                                        [class.green-icon]="this.formulario.get('email')!.valid"
+                                        [class.red-icon]="this.formulario.get('email')!.invalid && this.formulario.get('email')!.touched"></i>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" formControlName="email" placeholder="Email"
+                                maxlength="200">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-white">
+                                    <i class="bi bi-person-circle"
+                                        [class.green-icon]="this.formulario.get('direccion')!.valid"
+                                        [class.red-icon]="this.formulario.get('direccion')!.invalid && this.formulario.get('direccion')!.touched"></i>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" formControlName="direccion" placeholder="Direccion"
+                                maxlength="200">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="form-group">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-secondary"
+                                (click)="activeModal.dismiss()">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="this.formulario.invalid">
+                                Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

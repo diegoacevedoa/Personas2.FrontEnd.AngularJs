@@ -1,0 +1,133 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Personas</h3>
+            <p class="card-text">A continuación les presentamos las personas registradas en el sistema.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-success" (click)="savePersona()"><i class="bi bi-plus"></i>
+                    Agregar</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <div class="accordion" id="accordionFilter">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Búsqueda
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionFilter">
+                                <div class="accordion-body">
+                                    <div class="row" [formGroup]="search">
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="" class="form-label">No Documento</label>
+                                                <input type="text" class="form-control" formControlName="noDocumento">
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="form-group">
+                                                <label for="" class="form-label">Nombre</label>
+                                                <input type="text" class="form-control" formControlName="nombres">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="button" class="btn btn-secondary" (click)="createSearch()"><i
+                                                    class="bi bi-eraser"></i> Limpiar</button>
+                                            <button type="button" class="btn btn-primary"
+                                                (click)="searchAllPersonas()"><i class="bi bi-funnel"></i>
+                                                Filtrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <div class="container">
+                        <!-- <div class="row">
+                            <div class="col col-xxl-1 col-xl-1">
+                                Nombres
+                            </div>
+                            <div class="col col-xxl-1 col-xl-1">
+                                Apellidos
+                            </div>
+                            <div class="col col-xxl-1 col-xl-1">
+                                Tipo Documento
+                            </div>
+                            <div class="col col-xxl-1 col-xl-1">
+                                No Documento
+                            </div>
+                            <div class="col-2 col-xxl-2 col-xl-2">
+                                Fecha Nacimiento
+                            </div>
+                            <div class="col col-xxl-1 col-xl-1">
+                                No Contacto
+                            </div>
+                            <div class="col-2 col-xxl-2 col-xl-2">
+                                Email
+                            </div>
+                            <div class="col-2 col-xxl-2 col-xl-2">
+                                Dirección
+                            </div>
+                            <div class="col col-xxl-1 col-xl-1">
+                                Acciones
+                            </div>
+                        </div> -->
+                        <div class="row" *ngFor="let item of dataSource; let i = index">
+                            <div class="col col-xxl-1 col-xl-1 col-lg-1 col-md-1">
+                                <label class="font-weight-bold" *ngIf="i == 0">Nombres</label>                                
+                                {{item.nombres}}
+                            </div>
+                            <div class="col col-xxl-1 col-xl-1 col-lg-1 col-md-1">
+                                <label class="font-weight-bold" *ngIf="i == 0">Apellidos</label>                               
+                                {{item.apellidos}}
+                            </div>
+                            <div class="col col-xxl-1 col-xl-1 col-lg-1 col-md-1">
+                                <label class="font-weight-bold" *ngIf="i == 0">TipoDoc</label>                                                           
+                                {{item.nombreTipoDocumento}}
+                            </div>
+                            <div class="col col-xxl-1 col-xl-1 col-lg-1 col-md-1">
+                                <label class="font-weight-bold" *ngIf="i == 0">NoDoc</label>                                                     
+                                {{item.noDocumento}}
+                            </div>
+                            <div class="col-2 col-xxl-2 col-xl-2 col-lg-2 col-md-2">
+                                <label class="font-weight-bold" *ngIf="i == 0">Fecha Nacimiento</label>                                
+                                {{item.fechaNacimiento}}
+                            </div>
+                            <div class="col col-xxl-1 col-xl-1 col-lg-1 col-md-1">
+                                <label class="font-weight-bold" *ngIf="i == 0">NoCont</label>                                
+                                {{item.noContacto}}
+                            </div>
+                            <div class="col-2 col-xxl-2 col-xl-2 col-lg-2 col-md-2">
+                                <label class="font-weight-bold" *ngIf="i == 0">Email</label>                                
+                                {{item.email}}
+                            </div>
+                            <div class="col-2 col-xxl-2 col-xl-2 col-lg-2 col-md-2">
+                                <label class="font-weight-bold" *ngIf="i == 0">Dirección</label>                                
+                                {{item.direccion}}
+                            </div>
+                            <div class="col col-xxl-1 col-xl-1 col-lg-1 col-md-1">
+                                <label class="font-weight-bold" *ngIf="i == 0">Acciones</label>                                
+                                <i class="bi bi-pencil-square text-info" style="cursor:pointer"
+                                    (click)="savePersona(item)"></i>
+                                <i class="bi bi-trash text-danger" style="cursor:pointer"
+                                    (click)="deletePersona(item.id)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
